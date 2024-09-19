@@ -1,0 +1,49 @@
+// C++ code
+// Luan Expedito, Carlos Alberto, Rafel SIlva e Ruan Carlos
+#include <Servo.h>
+
+int led = 3;
+int pos = 0;
+Servo servo_10;
+int portaLDR = A0;
+int valorLDR = 0;
+void setup(){
+  
+  servo_10.attach(10, 500, 2500);
+  pinMode (led, OUTPUT);
+  Serial.begin (9600);
+
+
+}
+
+void loop()
+{
+  valorLDR = analogRead(portaLDR);
+  Serial.println (valorLDR);
+  delay(100);
+  if(valorLDR < 300){
+    //digitalWrite (led, HIGH);
+    Serial.println ("aperta!");
+    servo_bater();
+  /*}else{
+    digitalWrite (led, LOW);
+    Serial.println ("Clareo!");
+  }
+  */
+    
+  }
+}
+
+void servo_bater(){
+  
+   for (pos = 0; pos <= 90; pos += 1) {
+    servo_10.write(pos);
+    delay(4); 
+  }
+  for (pos = 85; pos >= 90; pos -= 1) {
+    servo_10.write(pos);
+    delay(4);
+  
+  }
+  
+}
